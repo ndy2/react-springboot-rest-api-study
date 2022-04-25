@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql;
@@ -58,6 +59,26 @@ class ProductJdbcRepositoryTest {
         assertThat(all).isNotEmpty();
     }
 
+    @Test
+    @Order(2)
+    void testFindByName(){
+        Optional<Product> product = repository.findByName(newProduct.getProductName());
+        assertThat(product).isPresent();
+    }
 
 
+    @Test
+    @Order(3)
+    void testFinById(){
+        Optional<Product> product = repository.findById(newProduct.getProductId());
+        assertThat(product).isPresent();
+    }
+
+
+    @Test
+    @Order(4)
+    void testFinByCategory(){
+        List<Product> products = repository.findByCategory(newProduct.getCategory());
+        assertThat(products).isNotEmpty();
+    }
 }
