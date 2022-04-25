@@ -6,6 +6,6 @@ CREATE TABLE products
     price        bigint      NOT NULL,
     description  VARCHAR(500) DEFAULT NULL,
     created_at   datetime(6) NOT NULL,
-    updated_at   datetime(6) DEFAULT NULL;
+    updated_at   datetime(6) DEFAULT NULL
 
-)
+);
