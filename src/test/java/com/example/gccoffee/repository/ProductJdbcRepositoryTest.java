@@ -81,4 +81,23 @@ class ProductJdbcRepositoryTest {
         List<Product> products = repository.findByCategory(newProduct.getCategory());
         assertThat(products).isNotEmpty();
     }
+
+    @Test
+    @Order(5)
+    void testUpdate(){
+        newProduct.setProductName("updated-product");
+        repository.update(newProduct);
+
+        Optional<Product> product = repository.findById(newProduct.getProductId());
+        assertThat(product).isPresent();
+        assertThat(product.get().getProductName()).isEqualTo(newProduct.getProductName());
+    }
+
+    @Test
+    @Order(6)
+    void testDeleteAll(){
+        repository.deleteAll();
+        List<Product> all = repository.findAll();
+        assertThat(all).isEmpty();
+    }
 }
